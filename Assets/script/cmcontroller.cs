@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class cmcontroller : MonoBehaviour
-{
-    public GameObject target;
-    public float Xoffset, Yoffset, Zoffset;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+{    
+    public Transform target;
+    public float offsety;
+    public float turnbackspeed;
+    void Start(){
     }
-
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.position = target.transform.position + new Vector3(-Xoffset, Yoffset, Zoffset);
-        transform.LookAt(target.transform.position);
+        //Vector3 pos=target.transform.position-transform.position;
+        //pos[1]+=offsety;
+        //transform.rotation=Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(pos),turnbackspeed*Time.deltaTime);
     }
 }

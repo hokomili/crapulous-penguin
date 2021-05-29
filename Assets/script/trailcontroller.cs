@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class trailcontroller : MonoBehaviour
 {
-    private TrailRenderer trail;
+    public TrailRenderer trail;
+    public Mesh trailmesh;
+    public Camera selfcamera;
     // Start is called before the first frame update
     void Start()
     {
-        trail = GetComponent<TrailRenderer>();
-        Cursor.visible = false;
+        trailmesh=new Mesh();
+        this.GetComponent<MeshCollider>().sharedMesh=trailmesh;
+        this.GetComponent<MeshFilter>().mesh=trailmesh;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.RightAlt))
-        {
-            trail.startColor = Color.green;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            trail.startColor = Color.cyan;
-        }
+        trail.BakeMesh(trailmesh);
     }
-
 }

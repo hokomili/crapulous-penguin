@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class playercontroler : MonoBehaviour {
 	public float speed;
 	public float rotationalspeed;
@@ -12,6 +13,8 @@ public class playercontroler : MonoBehaviour {
 	private Rigidbody rb;
 	private float cooldown=0;
 	public Color32 colo;
+	public int layerMask;
+	public MeshCollider enemytrail;
 	//private int[][] triangles;
 	private MeshFilter[] meshF;
 	//private MeshRenderer[] meh;
@@ -31,7 +34,7 @@ public class playercontroler : MonoBehaviour {
 		/*if(cooldown==0){
 			transform.rotation=Quaternion.Lerp(transform.rotation,Quaternion.Euler(-rb.velocity.y*30,transform.eulerAngles.y,0f),0.8f*Time.deltaTime);
 		}*/
-		if(Physics.SphereCast(transform.position, 0.01f, new Vector3(0f,-1f,0f), out hit, 0.6f)) {
+		if(Physics.SphereCast(transform.position, 0.01f, new Vector3(0f,-1f,0f), out hit, 0.6f,layerMask)) {
 			if(hit.triangleIndex>=0){
 				Vector3 leerp=new Vector3(Quaternion.LookRotation(Vector3.Cross(transform.right, hit.normal)).eulerAngles.x,Quaternion.LookRotation(Vector3.Cross(transform.right, hit.normal)).eulerAngles.y,0f);
 				transform.rotation=Quaternion.Lerp(transform.rotation,Quaternion.Euler(leerp),backspeed*4*Time.deltaTime);
@@ -70,4 +73,8 @@ public class playercontroler : MonoBehaviour {
 		}
 		rb.AddForce (movement * speed*60*Time.deltaTime);
 	}
+	private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other);
+    }
 }

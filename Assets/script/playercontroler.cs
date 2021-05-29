@@ -8,30 +8,24 @@ public class playercontroler : MonoBehaviour {
 	public float rotationalspeed;
 	public GameObject meshs;
 	public float backspeed;
+	public int player;
 	private Rigidbody rb;
 	private float cooldown=0;
-	public Color colo;
+	public Color32 colo;
 	//private int[][] triangles;
 	private MeshFilter[] meshF;
 	//private MeshRenderer[] meh;
+	private string axistringx;
+	private string axistringy;
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody> ();
-		meshF=meshs.GetComponentsInChildren<MeshFilter>();
-		//meh=meshs.GetComponentsInChildren<MeshRenderer>();
-		//triangles= new int[meshF.Length][];
-		for(int i=0;i<meshF.Length;i++){
-			//triangles[i]= meshF[i].mesh.triangles;
-			Color[] mecol= new Color[meshF[i].mesh.vertices.Length];
-			for(int j=0;j<meshF[i].mesh.vertices.Length;j++){
-				mecol[j]= new Color(0,0,0,1);
-			}
-			meshF[i].mesh.colors=mecol;
-		}
+		axistringx="Horizontal"+player;
+		axistringy="Vertical"+player;
 	}
 	void FixedUpdate (){
-		float movex = Input.GetAxis("Horizontal");
-		float movez = Input.GetAxis("Vertical");
+		float movex = Input.GetAxis(axistringx);
+		float movez = Input.GetAxis(axistringy);
 		Vector3 movement;
 		RaycastHit hit;
 		/*if(cooldown==0){
@@ -45,11 +39,11 @@ public class playercontroler : MonoBehaviour {
 				//var vert1 = triangles[hit.triangleIndex * 3 + 0];
 				//var vert2 = triangles[hit.triangleIndex * 3 + 1];
 				//var vert3 = triangles[hit.triangleIndex * 3 + 2];
-				Color[] mecol= meshh.mesh.colors;
+				Color32[] mecol= meshh.mesh.colors32;
 				mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 0]] = colo;
 				mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 1]] = colo;
 				mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 2]] = colo;
-				meshh.mesh.colors=mecol;
+				meshh.mesh.colors32=mecol;
 			}
 		}
 		else/* if(cooldown>0||rb.velocity.y<0)*/{

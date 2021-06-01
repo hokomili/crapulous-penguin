@@ -7,16 +7,14 @@ using UnityEngine.UI;
 public class playercontroler : MonoBehaviour {
 	public float speed;
 	public float rotationalspeed;
-	public GameObject meshs;
 	public float backspeed;
 	public int player;
 	private Rigidbody rb;
 	private float cooldown=0;
 	public Color32 colo;
 	public int layerMask;
-	public MeshCollider enemytrail;
+	public GameObject enemytrail;
 	//private int[][] triangles;
-	private MeshFilter[] meshF;
 	//private MeshRenderer[] meh;
 	private string axistringx;
 	private string axistringy;
@@ -75,6 +73,6 @@ public class playercontroler : MonoBehaviour {
 	}
 	private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other);
+		if(other.transform.tag==enemytrail.transform.tag)Debug.Log("enemy");
     }
 }

@@ -7,6 +7,8 @@ TagManager:
   - trail
   - Snake
   - Penguin
+  - apple
+  - banana
   layers:
   - Default
   - TransparentFX

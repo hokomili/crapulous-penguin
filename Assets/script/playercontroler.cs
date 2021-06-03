@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class playercontroler : MonoBehaviour {
 	public float speed;
+	public float taillength;
 	public float rotationalspeed;
 	public float backspeed;
 	public int player;
@@ -19,23 +20,30 @@ public class playercontroler : MonoBehaviour {
 	public GameObject exfield;
 	public AudioClip[] audioref;
 	public GameObject sound;
+	public GameObject respawner;
 	public int currentskill=0;
 	public int skillcount=0;
 	private string axistringx;
 	private string axistringy;
 	private string function;
-	
+	private float taillengthorigin;
+	private float speedorigin;
+	private float cooldownrespawn=0f;
 	void Start ()
 	{
+		taillengthorigin=taillength;
+		speedorigin=speed;
 		rb = GetComponent<Rigidbody> ();
 		axistringx="Horizontal"+player;
 		axistringy="Vertical"+player;
 		function="Function"+player;
 	}
 	void FixedUpdate (){
-		if(skillcount==0){
+		
+		if(skillcount<=0){
 			currentskill=0;
 		}
+		if(cooldownrespawn<=0){
 		float movex = Input.GetAxis(axistringx);
 		float movez = Input.GetAxis(axistringy);
 		Vector3 movement;
@@ -79,27 +87,40 @@ public class playercontroler : MonoBehaviour {
 				case 2:
 				Playsound(2,0.3f);
 				cooldown=1f;
-				movement = new Vector3 (rb.transform.forward.x*1000, rb.transform.forward.y*1000-49f, rb.transform.forward.z*1000);
+				movement = new Vector3 (rb.transform.forward.x*2000, rb.transform.forward.y*2000-49f, rb.transform.forward.z*2000);
 				break;
 				case 3:
 				Playsound(3);
 				cooldown=1f;
 				GameObject exfie = Instantiate(exfield, this.gameObject.transform.position, Quaternion.identity);
-				exfie.transform.SetParent(this.transform);
+				exfie.transform.position=this.transform.position;
+				exfie.GetComponent<exfieldcontroller>().initiator=this.gameObject;
 				exfie.transform.tag=this.tag;
+				exfie.SetActive(true);
 				//Instantiate(sparkles, this.gameObject.transform.position, Quaternion.identity);
-				
 				break;
 			}
+		}
+		rb.AddForce (movement * speed*60*Time.deltaTime);
 		}
 		if(cooldown>0){
 			cooldown-=Time.deltaTime;
 		}
-		rb.AddForce (movement * speed*60*Time.deltaTime);
+		if(cooldownrespawn>0){
+			this.transform.position=Vector3.Lerp(this.transform.position,respawner.transform.position,Time.deltaTime*10);
+			this.transform.rotation=Quaternion.Lerp(this.transform.rotation,respawner.transform.rotation,Time.deltaTime*10);
+			cooldownrespawn-=Time.deltaTime;
+		}
 	}
 	private void OnTriggerEnter(Collider other)
     {
-		if(other.transform.tag==enemytrail.transform.tag)Debug.Log("enemy");
+		if(other.transform.tag==enemytrail.transform.tag)
+		{
+			taillength=taillengthorigin;
+			speed=speedorigin;
+			cooldownrespawn=3f;
+			return;
+		}
 		switch(other.gameObject.tag){
 			case "apple":
 			currentskill=1;

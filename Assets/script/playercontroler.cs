@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class playercontroler : MonoBehaviour {
 	public float rotationalspeed;
 	public float backspeed;
 	public int player;
-	private Rigidbody rb;
+	public Rigidbody rb;
 	private float cooldown=0;
 	public Color32 colo;
 	public int layerMask;
@@ -29,6 +30,14 @@ public class playercontroler : MonoBehaviour {
 	private float taillengthorigin;
 	private float speedorigin;
 	private float cooldownrespawn=0f;
+	public Vector3 movement;
+	public SkillController skillController;
+
+	private void Awake()
+	{
+		skillController = new SkillController(this);
+	}
+
 	void Start ()
 	{
 		taillengthorigin=taillength;
@@ -46,7 +55,6 @@ public class playercontroler : MonoBehaviour {
 		if(cooldownrespawn<=0){
 		float movex = Input.GetAxis(axistringx);
 		float movez = Input.GetAxis(axistringy);
-		Vector3 movement;
 		RaycastHit hit;
 		/*if(cooldown==0){
 			transform.rotation=Quaternion.Lerp(transform.rotation,Quaternion.Euler(-rb.velocity.y*30,transform.eulerAngles.y,0f),0.8f*Time.deltaTime);
@@ -76,30 +84,35 @@ public class playercontroler : MonoBehaviour {
 		}
 		transform.Rotate(new Vector3(0f,movex*rotationalspeed,0f));
 		movement = new Vector3 (rb.transform.forward.x*100, rb.transform.forward.y*100-49f, rb.transform.forward.z*100);
-		if (Input.GetAxis(function)>0&&(cooldown<=0)){
-			skillcount--;
-			switch(currentskill){
-				case 1:
-				Playsound(1);
-				cooldown=1f;
-				movement = new Vector3 (rb.transform.forward.x*100, rb.transform.forward.y*100+1470f,rb.transform.forward.z*100);
-				break;
-				case 2:
-				Playsound(2,0.3f);
-				cooldown=1f;
-				movement = new Vector3 (rb.transform.forward.x*2000, rb.transform.forward.y*2000-49f, rb.transform.forward.z*2000);
-				break;
-				case 3:
-				Playsound(3);
-				cooldown=1f;
-				GameObject exfie = Instantiate(exfield, this.gameObject.transform.position, Quaternion.identity);
-				exfie.transform.position=this.transform.position;
-				exfie.GetComponent<exfieldcontroller>().initiator=this.gameObject;
-				exfie.transform.tag=this.tag;
-				exfie.SetActive(true);
-				//Instantiate(sparkles, this.gameObject.transform.position, Quaternion.identity);
-				break;
+		if (Input.GetAxis(function)>0/*&&(cooldown<=0)*/){
+			if (cooldown <= 0)
+			{
+				skillController.UseSkill();
+				cooldown = skillController.coolDown;
 			}
+			// skillcount--;
+			// switch(currentskill){
+			// 	case 1:
+			// 	Playsound(1);
+			// 	cooldown=1f;
+			// 	movement = new Vector3 (rb.transform.forward.x*100, rb.transform.forward.y*100+1470f,rb.transform.forward.z*100);
+			// 	break;
+			// 	case 2:
+			// 	Playsound(2,0.3f);
+			// 	cooldown=1f;
+			// 	movement = new Vector3 (rb.transform.forward.x*2000, rb.transform.forward.y*2000-49f, rb.transform.forward.z*2000);
+			// 	break;
+			// 	case 3:
+			// 	Playsound(3);
+			// 	cooldown=1f;
+			// 	GameObject exfie = Instantiate(exfield, this.gameObject.transform.position, Quaternion.identity);
+			// 	exfie.transform.position=this.transform.position;
+			// 	exfie.GetComponent<exfieldcontroller>().initiator=this.gameObject;
+			// 	exfie.transform.tag=this.tag;
+			// 	exfie.SetActive(true);
+			// 	//Instantiate(sparkles, this.gameObject.transform.position, Quaternion.identity);
+			// 	break;
+			//	}
 		}
 		rb.AddForce (movement * speed*60*Time.deltaTime);
 		}
@@ -121,25 +134,32 @@ public class playercontroler : MonoBehaviour {
 			cooldownrespawn=3f;
 			return;
 		}
-		switch(other.gameObject.tag){
-			case "apple":
-			currentskill=1;
-			skillcount=3;
-            Playsound(0);
-			break;
-			case "banana":
-			currentskill=2;
-			skillcount=3;
-            Playsound(0);
-			break;
-			case "bomb":
-			currentskill=3;
-			skillcount=3;
-            Playsound(0);
-			break;
-        }
+		
+		if (other.GetComponent<SkillObjectController>())
+		{
+			skillController.ChangeSkill(other.GetComponent<SkillObjectController>().skillObject);
+			cooldown = skillController.coolDown;
+			Playsound(0);
+		}
+		// switch(other.gameObject.tag){
+		// 	case "apple":
+		// 	currentskill=1;
+		// 	skillcount=3;
+  //           Playsound(0);
+		// 	break;
+		// 	case "banana":
+		// 	currentskill=2;
+		// 	skillcount=3;
+  //           Playsound(0);
+		// 	break;
+		// 	case "bomb":
+		// 	currentskill=3;
+		// 	skillcount=3;
+  //           Playsound(0);
+		// 	break;
+  //       }
     }
-	void Playsound(int index,float offset=0f)
+	public void Playsound(int index,float offset=0f)
     {
 		AudioSource[] sounds= sound.GetComponents<AudioSource>();
 		for(int i=0;i<sounds.Length;i++){

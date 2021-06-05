@@ -21,8 +21,8 @@ public class SkillController
         this.Playercontroler = playercontroler;
         skills = new Dictionary<SkillType, Skill>()
         {
-            {SkillType.Apple, new AppleSkill(playercontroler)},
-            {SkillType.Banana, new BananaSkill(playercontroler)},
+            {SkillType.Jump, new JumpSkill(playercontroler)},
+            {SkillType.Dash, new DashSkill(playercontroler)},
             {SkillType.Bomb, new BombSkill(playercontroler)}
         };
     }

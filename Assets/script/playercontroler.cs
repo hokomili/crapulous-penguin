@@ -24,6 +24,8 @@ public class playercontroler : MonoBehaviour {
 	public GameObject respawner;
 	public int currentskill=0;
 	public int skillcount=0;
+	public Material dskin;
+	public Material dsball;
 	private string axistringx;
 	private string axistringy;
 	private string function;
@@ -122,6 +124,15 @@ public class playercontroler : MonoBehaviour {
 		if(cooldownrespawn>0){
 			this.transform.position=Vector3.Lerp(this.transform.position,respawner.transform.position,Time.deltaTime*10);
 			this.transform.rotation=Quaternion.Lerp(this.transform.rotation,respawner.transform.rotation,Time.deltaTime*10);
+			if(cooldownrespawn>2){
+				dskin.SetFloat("_SliceAmount",dskin.GetFloat("_SliceAmount")-dskin.GetFloat("_SliceAmount")*Time.deltaTime*3);
+				dsball.SetFloat("_SliceAmount",dsball.GetFloat("_SliceAmount")-dsball.GetFloat("_SliceAmount")*Time.deltaTime*3);
+
+			}
+			else{
+				dskin.SetFloat("_SliceAmount",dskin.GetFloat("_SliceAmount")+(2f-dskin.GetFloat("_SliceAmount"))*Time.deltaTime);
+				dsball.SetFloat("_SliceAmount",dsball.GetFloat("_SliceAmount")+(2f-dsball.GetFloat("_SliceAmount"))*Time.deltaTime);
+				}
 			cooldownrespawn-=Time.deltaTime;
 		}
 	}

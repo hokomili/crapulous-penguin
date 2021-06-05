@@ -4,8 +4,8 @@ using UnityEngine;
 
 public enum SkillType
 {
-    Apple,
-    Banana,
+    Jump,
+    Dash,
     Bomb,
 }
 

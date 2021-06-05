@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BananaSkill : Skill
+public class DashSkill : Skill
 {
     private playercontroler Playercontroler;
-    public BananaSkill(playercontroler playercontroler) : base(playercontroler)
+    public DashSkill(playercontroler playercontroler) : base(playercontroler)
     {
         this.Playercontroler = playercontroler;
     }

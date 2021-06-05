@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AppleSkill : Skill
+public class JumpSkill : Skill
 {
     private playercontroler Playercontroler;
-    public AppleSkill(playercontroler playercontroler) : base(playercontroler)
+    public JumpSkill(playercontroler playercontroler) : base(playercontroler)
     {
         this.Playercontroler = playercontroler;
     }

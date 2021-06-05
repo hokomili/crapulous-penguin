@@ -27,7 +27,7 @@ Material:
     m_Floats:
     - Vector1_2FC928BA: 30
     - Vector1_4860D7EF: 0.01
-    - _SliceAmount: 1.7440281
+    - _SliceAmount: 1.7446196
     m_Colors:
     - Color_5AD55092: {r: 0, g: 2.9960785, b: 0.7372549, a: 0}
     - Color_66ED08F4: {r: 1.482353, g: 1.4980392, b: 0.5882353, a: 0}

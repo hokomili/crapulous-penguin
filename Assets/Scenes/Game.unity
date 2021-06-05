@@ -1787,6 +1787,7 @@ GameObject:
   m_Component:
   - component: {fileID: 765620230}
   - component: {fileID: 765620231}
+  - component: {fileID: 765620232}
   m_Layer: 0
   m_Name: accelerate
   m_TagString: Untagged
@@ -1822,6 +1823,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.03
   m_Center: {x: 0, y: 0.035, z: 0}
+--- !u!114 &765620232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765620229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea77380f5b2ce004cac0e311e6f563cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillObject: {fileID: 11400000, guid: 3eb7b4b280719d84ea17aaf6e6429271, type: 2}
 --- !u!4 &819532307 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ca82563a2e7e6f846a00552fa6622483,
@@ -25006,6 +25020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1645890569}
   - component: {fileID: 1645890570}
+  - component: {fileID: 1645890571}
   m_Layer: 0
   m_Name: Jump
   m_TagString: Untagged
@@ -25041,6 +25056,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.03
   m_Center: {x: 0, y: 0.035, z: 0}
+--- !u!114 &1645890571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645890568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea77380f5b2ce004cac0e311e6f563cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillObject: {fileID: 11400000, guid: 51d9bf0c109000541b3e9aed09d34d08, type: 2}
 --- !u!1 &1698254595 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8123006515755216388, guid: d856fc84a2147794cb5411c9a9b68759,
@@ -25881,7 +25909,6 @@ GameObject:
   - component: {fileID: 1864986854}
   - component: {fileID: 1864986856}
   - component: {fileID: 1864986855}
-  - component: {fileID: 1864986857}
   m_Layer: 0
   m_Name: banana
   m_TagString: banana
@@ -25931,19 +25958,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1864986857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864986853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea77380f5b2ce004cac0e311e6f563cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillObject: {fileID: 11400000, guid: 3eb7b4b280719d84ea17aaf6e6429271, type: 2}
 --- !u!1 &1902118347
 GameObject:
   m_ObjectHideFlags: 0
@@ -26055,7 +26069,6 @@ GameObject:
   - component: {fileID: 1999959447}
   - component: {fileID: 1999959449}
   - component: {fileID: 1999959448}
-  - component: {fileID: 1999959450}
   m_Layer: 0
   m_Name: apple
   m_TagString: apple
@@ -26105,19 +26118,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1999959450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999959446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea77380f5b2ce004cac0e311e6f563cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillObject: {fileID: 11400000, guid: 51d9bf0c109000541b3e9aed09d34d08, type: 2}
 --- !u!1 &2010130004
 GameObject:
   m_ObjectHideFlags: 0

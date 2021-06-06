@@ -26,6 +26,8 @@ public class playercontroler : MonoBehaviour {
 	public int skillcount=0;
 	public Material dskin;
 	public Material dsball;
+	public GameObject enemy;
+	public int territory=0;
 	private string axistringx;
 	private string axistringy;
 	private string function;
@@ -70,9 +72,33 @@ public class playercontroler : MonoBehaviour {
 				//var vert2 = triangles[hit.triangleIndex * 3 + 1];
 				//var vert3 = triangles[hit.triangleIndex * 3 + 2];
 				Color32[] mecol= meshh.mesh.colors32;
-				mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 0]] = colo;
-				mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 1]] = colo;
-				mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 2]] = colo;
+				{Color32 a=mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 0]];
+				if(!(a.r==colo.r&&a.g==colo.g&&a.b==colo.b)){
+					mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 0]] = colo;
+					territory+=1;
+					Color32 c=enemy.GetComponent<playercontroler>().colo;
+					if(a.r==c.r&&a.g==c.g&&a.b==c.b){
+						enemy.GetComponent<playercontroler>().territory-=1;
+					}
+				}}
+				{Color32 a=mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 1]];
+				if(!(a.r==colo.r&&a.g==colo.g&&a.b==colo.b)){
+					mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 1]] = colo;
+					territory+=1;
+					Color32 c=enemy.GetComponent<playercontroler>().colo;
+					if(a.r==c.r&&a.g==c.g&&a.b==c.b){
+						enemy.GetComponent<playercontroler>().territory-=1;
+					}
+				}}
+				{Color32 a=mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 2]];
+				if(!(a.r==colo.r&&a.g==colo.g&&a.b==colo.b)){
+					mecol[meshh.mesh.triangles[hit.triangleIndex * 3 + 2]] = colo;
+					territory+=1;
+					Color32 c=enemy.GetComponent<playercontroler>().colo;
+					if(a.r==c.r&&a.g==c.g&&a.b==c.b){
+						enemy.GetComponent<playercontroler>().territory-=1;
+					}
+				}}
 				meshh.mesh.colors32=mecol;
 			}
 		}

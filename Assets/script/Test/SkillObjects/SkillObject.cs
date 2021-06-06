@@ -16,7 +16,7 @@ public class SkillObject : ScriptableObject
     public string SkillName;
     public SkillType type;
     public Sprite sprite;
-
+    public GameObject DestroyParticle;
     public int amount;
     public float coolDown;
 

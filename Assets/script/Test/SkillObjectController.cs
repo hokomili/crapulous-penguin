@@ -11,6 +11,7 @@ public class SkillObjectController : MonoBehaviour
     {
         if (other.GetComponent<playercontroler>())
         {
+            GameObject.Instantiate(skillObject.DestroyParticle, this.gameObject.transform.position, Quaternion.identity);
             this.gameObject.SetActive(false);
         }
     }

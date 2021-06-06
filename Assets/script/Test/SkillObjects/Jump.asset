@@ -16,6 +16,8 @@ MonoBehaviour:
   SkillName: "\u8DF3\u8E8D"
   type: 0
   sprite: {fileID: 0}
+  DestroyParticle: {fileID: 5455896769892527011, guid: d4590feabb03dcc4e84344475f8bb30b,
+    type: 3}
   amount: 3
   coolDown: 1
   description: Jumo

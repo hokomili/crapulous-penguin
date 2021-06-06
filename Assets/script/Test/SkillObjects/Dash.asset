@@ -16,6 +16,8 @@ MonoBehaviour:
   SkillName: "\u52A0\u901F"
   type: 1
   sprite: {fileID: 0}
+  DestroyParticle: {fileID: 336510917552565727, guid: 39dcc038b65900c43a4174315db09985,
+    type: 3}
   amount: 3
   coolDown: 1
   description: Fast

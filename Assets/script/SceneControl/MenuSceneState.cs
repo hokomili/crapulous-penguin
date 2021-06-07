@@ -25,7 +25,7 @@ public class MenuSceneState : ISceneState
     public void OnStartGameClicked()
     {
         Debug.Log("go to game");
-        sceneController.SetScene(SceneType.Game);
+        sceneController.SetScene(SceneType.Game,SceneType.Menu);
     }
 
     public void OnToturialClicked()

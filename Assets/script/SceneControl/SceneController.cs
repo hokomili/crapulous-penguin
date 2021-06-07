@@ -63,11 +63,12 @@ public class SceneController : MonoBehaviour
         currentSceneState?.SceneUpdate();
     }
 
-    public void SetScene(SceneType sceneType)
+    public void SetScene(SceneType sceneType,SceneType currentscene)
     {
         isRunBegin = false;
         Debug.Log(sceneDic[sceneType].SceneName);
         LoadScene(sceneDic[sceneType].SceneName);
+        SceneManager.UnloadSceneAsync(0);
         if(currentSceneState != null) currentSceneState.SceneEnd();
         currentSceneState = sceneDic[sceneType];
     }

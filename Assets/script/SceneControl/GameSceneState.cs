@@ -21,12 +21,15 @@ public class GameSceneState : ISceneState
         if(countDownAni != null)
         {
             countDownAni.Play("AStartCountdown");
+            sceneController.PlayAudio(sceneController.audioObjects.audioList[1]);
+
             if(countDownAni.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !countDownAni.IsInTransition(0))
             {
                 countDownAni.enabled = false;
+                
                 Time.timeScale = 1;
             }
         }
-        // if(Input.GetKeyDown(KeyCode.R)) sceneController.SetScene(SceneType.Menu);
+        if(Input.GetKeyDown(KeyCode.R)) sceneController.SetScene(SceneType.Menu);
     }
 }

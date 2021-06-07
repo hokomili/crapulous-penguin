@@ -16,12 +16,14 @@ public enum SceneType
 
 public class SceneController : MonoBehaviour
 {
-    static SceneController instance;
+    private static SceneController _instance;
 
     public Button startGameBtn;
     public Button toturialBtn;
     public Button staaffBtn;
     public Button exitGameBtn;
+    public AudioObjects audioObjects;
+    public AudioSource audioSource;
 
     private ISceneState currentSceneState = null;
     private AsyncOperation asyncLoad;
@@ -31,12 +33,12 @@ public class SceneController : MonoBehaviour
 
     private void Awake() 
     {
-        if(instance == null)
+        if(_instance == null)
         {    
-            instance = this; 
+            _instance = this; 
             DontDestroyOnLoad(this.gameObject);
         }
-        else if(instance != this)
+        else if(_instance != this)
         {
             Destroy(gameObject);
         }
@@ -49,6 +51,7 @@ public class SceneController : MonoBehaviour
             {SceneType.Game, new GameSceneState(this)},
         };
         currentSceneState = new MenuSceneState(this); 
+        Debug.Log("Awake is called");
         // SetScene(SceneType.Menu);
     }
 
@@ -91,5 +94,16 @@ public class SceneController : MonoBehaviour
         if(SceneName == null || SceneName.Length == 0) return;
         asyncLoad = SceneManager.LoadSceneAsync(SceneName);
         // SceneManager.LoadScene(SceneName);
+    }
+
+    public void PlayAudio(AudioClip audioClip)
+    {
+        audioSource.clip = audioClip;
+        if(!audioSource.isPlaying) audioSource.Play();
+    }
+
+    public void StopAudio()
+    {
+        audioSource.Stop();
     }
 }

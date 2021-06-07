@@ -16,6 +16,8 @@ public enum SceneType
 
 public class SceneController : MonoBehaviour
 {
+    static SceneController instance;
+
     public Button startGameBtn;
     public Button toturialBtn;
     public Button staaffBtn;
@@ -29,7 +31,18 @@ public class SceneController : MonoBehaviour
 
     private void Awake() 
     {
-        GameObject.DontDestroyOnLoad(this.gameObject);
+        if(instance == null)
+        {    
+            instance = this; 
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if(instance != this)
+        {
+            Destroy(gameObject);
+        }
+        
+        // GameObject.DontDestroyOnLoad(this.gameObject);
+       
         sceneDic = new Dictionary<SceneType, ISceneState>
         {
             {SceneType.Menu, new MenuSceneState(this)},
@@ -63,12 +76,12 @@ public class SceneController : MonoBehaviour
         currentSceneState?.SceneUpdate();
     }
 
-    public void SetScene(SceneType sceneType,SceneType currentscene)
+    public void SetScene(SceneType sceneType)
     {
         isRunBegin = false;
         Debug.Log(sceneDic[sceneType].SceneName);
         LoadScene(sceneDic[sceneType].SceneName);
-        SceneManager.UnloadSceneAsync(0);
+        SceneManager.UnloadSceneAsync(currentSceneState.SceneName);
         if(currentSceneState != null) currentSceneState.SceneEnd();
         currentSceneState = sceneDic[sceneType];
     }

@@ -27,5 +27,6 @@ public class GameSceneState : ISceneState
                 Time.timeScale = 1;
             }
         }
+        // if(Input.GetKeyDown(KeyCode.R)) sceneController.SetScene(SceneType.Menu);
     }
 }

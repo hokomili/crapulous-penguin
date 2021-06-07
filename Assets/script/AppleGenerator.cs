@@ -25,7 +25,7 @@ public class AppleGenerator : MonoBehaviour {
             }
         }
         for(int i=0;i<skillObjects.Length;i++){
-            skillCooldown[i]=Random.Range(skillGentime[0],skillGentime[1]*10);
+            skillCooldown[i]=Random.Range(skillGentime[0],skillGentime[1]);
         }
 		cooldown=Random.Range(gentime[0],gentime[1]);
 	}
@@ -35,12 +35,11 @@ public class AppleGenerator : MonoBehaviour {
             if(!skillObjects[i].activeSelf){
                 skillCooldown[i]-=Time.deltaTime;
                 if(skillCooldown[i]<0){
-                    skillCooldown[i]=Random.Range(skillGentime[0],skillGentime[1]*10);
+                    skillCooldown[i]=Random.Range(skillGentime[0],skillGentime[1]);
                     Vector3 posi=vertexs[Random.Range(0,vertexs.Count)];
                     posi.y+=skillOffsetHeight;
-                    int rand=Mathf.FloorToInt(Random.Range(0,skillObjects.Length));
-                    skillObjects[rand].transform.position=posi;
-                    skillObjects[rand].SetActive(true);
+                    skillObjects[i].transform.position=posi;
+                    skillObjects[i].SetActive(true);
                 }
             }
         }

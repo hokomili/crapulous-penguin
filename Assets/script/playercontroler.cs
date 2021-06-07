@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class playercontroler : MonoBehaviour {
 	public float speed;
-	public float taillength;
 	public float rotationalspeed;
 	public float backspeed;
 	public int player;
@@ -28,6 +27,7 @@ public class playercontroler : MonoBehaviour {
 	public Material dsball;
 	public GameObject enemy;
 	public int territory=0;
+	public TrailRenderer[] thistrails;
 	private string axistringx;
 	private string axistringy;
 	private string function;
@@ -44,7 +44,7 @@ public class playercontroler : MonoBehaviour {
 
 	void Start ()
 	{
-		taillengthorigin=taillength;
+		taillengthorigin=thistrails[0].time;
 		speedorigin=speed;
 		rb = GetComponent<Rigidbody> ();
 		axistringx="Horizontal"+player;
@@ -166,7 +166,10 @@ public class playercontroler : MonoBehaviour {
     {
 		if(other.transform.tag==enemytrail.transform.tag)
 		{
-			taillength=taillengthorigin;
+			Playsound(5,0.2f);
+			for(int i=0;i<thistrails.Length;i++){
+                thistrails[i].time=taillengthorigin;
+            }
 			speed=speedorigin;
 			cooldownrespawn=3f;
 			return;
@@ -176,7 +179,7 @@ public class playercontroler : MonoBehaviour {
 		{
 			skillController.ChangeSkill(other.GetComponent<SkillObjectController>().skillObject);
 			cooldown = skillController.coolDown;
-			Playsound(0);
+			Playsound(4);
 		}
 		// switch(other.gameObject.tag){
 		// 	case "apple":

@@ -13,6 +13,8 @@ public class SkillHintControl : MonoBehaviour
     private float countTimer;
     private CanvasGroup canvasGroup;
     private Text hintText;
+    private IEnumerator iEnum; 
+    [SerializeField]private bool isFading = false;
 
     private void OnDisable()
     {
@@ -35,7 +37,15 @@ public class SkillHintControl : MonoBehaviour
     public void SetImageAlpha(SkillObject skillObject)
     {
         if(skillObject == null) return;
-        StartCoroutine(FadeHint());        
+
+        if(isFading)
+        {
+            StopCoroutine(iEnum);
+            isFading = false;
+        }
+        iEnum = FadeHint();
+        StartCoroutine(iEnum);
+        
     }
 
     public void SetHintText(SkillObject skillObject)
@@ -48,6 +58,7 @@ public class SkillHintControl : MonoBehaviour
     {
         for(float i = 0; i <= fadeInTime; i+=Time.deltaTime)
         {
+            if(i == 0) isFading = true;
             canvasGroup.alpha = i / fadeInTime;
             yield return null;
         }
@@ -57,6 +68,7 @@ public class SkillHintControl : MonoBehaviour
         for(float i = fadeOutTime; i >= 0; i-=Time.deltaTime)
         {
             canvasGroup.alpha = i / fadeOutTime;
+            if(canvasGroup.alpha <= 0.1f) isFading = false;
             yield return null;
         }
     }

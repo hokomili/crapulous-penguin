@@ -4,6 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public enum SceneType
+{
+    Menu,
+    Game,
+    Result,
+    Toturial,
+    Staff,
+
+}
+
 public class SceneController : MonoBehaviour
 {
     public Button startGameBtn;
@@ -12,13 +22,21 @@ public class SceneController : MonoBehaviour
     public Button exitGameBtn;
 
     private ISceneState currentSceneState = null;
-
-    // private AsyncOperation operation;
+    private AsyncOperation asyncLoad;
     private bool isRunBegin = false;
+
+    private Dictionary<SceneType, ISceneState> sceneDic;
+
     private void Awake() 
     {
         GameObject.DontDestroyOnLoad(this.gameObject);
-        currentSceneState = new MenuSceneState(this);      
+        sceneDic = new Dictionary<SceneType, ISceneState>
+        {
+            {SceneType.Menu, new MenuSceneState(this)},
+            {SceneType.Game, new GameSceneState(this)},
+        };
+        currentSceneState = new MenuSceneState(this); 
+        // SetScene(SceneType.Menu);
     }
 
     // Start is called before the first frame update
@@ -30,7 +48,11 @@ public class SceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if(!operation.isDone) return;
+        if(asyncLoad != null && !asyncLoad.isDone)
+        {
+            Debug.Log("loading...");
+            return;
+        } 
 
         if(currentSceneState != null && isRunBegin == false)
         {
@@ -41,18 +63,19 @@ public class SceneController : MonoBehaviour
         currentSceneState?.SceneUpdate();
     }
 
-    public void SetScene(ISceneState State)
+    public void SetScene(SceneType sceneType)
     {
         isRunBegin = false;
-        Debug.Log(State.SceneName);
-        LoadScene(State.SceneName);
+        Debug.Log(sceneDic[sceneType].SceneName);
+        LoadScene(sceneDic[sceneType].SceneName);
         if(currentSceneState != null) currentSceneState.SceneEnd();
-        currentSceneState = State;
+        currentSceneState = sceneDic[sceneType];
     }
 
     private void LoadScene(string SceneName)
     {
         if(SceneName == null || SceneName.Length == 0) return;
-        SceneManager.LoadScene(SceneName);
+        asyncLoad = SceneManager.LoadSceneAsync(SceneName);
+        // SceneManager.LoadScene(SceneName);
     }
 }

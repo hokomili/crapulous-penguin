@@ -19,7 +19,9 @@ public class TimeControl : MonoBehaviour
     void Update()
     {
         countDownTime -= Time.deltaTime;
-        timeText.text = $"{(int)(countDownTime / 60)}:"+(countDownTime % 60<10?$"0{(int)(countDownTime % 60)}":$"{(int)(countDownTime % 60)}");
+        int min = (int)countDownTime / 60;
+        int sec = (int)countDownTime % 60;
+        timeText.text = min + ":" + (sec < 10 ? "0" : "") + sec;
         if (countDownTime <= 0f)
         {
             timeText.text = "0:00";

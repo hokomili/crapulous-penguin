@@ -610,10 +610,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17511ec424d5cbc4db6b4a115d60aebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGameBtn: {fileID: 105457067}
-  toturialBtn: {fileID: 303491302}
-  staaffBtn: {fileID: 1902546743}
-  exitGameBtn: {fileID: 1954715727}
+  startGameBtn: {fileID: 0}
+  toturialBtn: {fileID: 0}
+  staaffBtn: {fileID: 0}
+  exitGameBtn: {fileID: 0}
 --- !u!4 &165430631
 Transform:
   m_ObjectHideFlags: 0

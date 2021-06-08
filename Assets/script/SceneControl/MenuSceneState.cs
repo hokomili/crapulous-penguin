@@ -16,11 +16,21 @@ public class MenuSceneState : ISceneState
         sceneController.toturialBtn = GameObject.Find("ToturialBtn")?.GetComponent<Button>();
         sceneController.staaffBtn = GameObject.Find("StaffBtn")?.GetComponent<Button>();
         sceneController.exitGameBtn = GameObject.Find("ExitGameBtn")?.GetComponent<Button>();
-        
+
         sceneController.startGameBtn?.onClick.AddListener( ()=>OnStartGameClicked() );
         sceneController.toturialBtn?.onClick.AddListener( ()=>OnToturialClicked() );
         sceneController.staaffBtn?.onClick.AddListener( ()=>OnStaffClicked() );
         sceneController.exitGameBtn?.onClick.AddListener( ()=>OnExitGameClicked() );
+    }
+
+    public override void SceneUpdate()
+    {
+        sceneController.PlayAudio(sceneController.audioObjects.audioList[8]);
+    }
+
+    public override void SceneEnd()
+    {
+        
     }
 
     public void OnStartGameClicked()

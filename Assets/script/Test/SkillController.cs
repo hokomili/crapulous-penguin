@@ -13,6 +13,7 @@ public class SkillController
     public float coolDown = 0f;
     public event Action<SkillObject> OnSkillChanged;
     public event Action<SkillObject> OnSkillUsed;
+    public event Action OnSkillDeleted;
 
     public SkillController(playercontroler playercontroler)
     {
@@ -28,28 +29,31 @@ public class SkillController
     }
     
     public void UseSkill()
-    {
+    {   
+        currentSkill?.Tick();
+        remainCount--;
         OnSkillUsed?.Invoke(currentSkillObject);
+        
         if (remainCount <= 0)
         {
             DeleteSkill();
+            OnSkillDeleted?.Invoke();
             return;
-        }
-        currentSkill?.Tick();
-        remainCount--;
+        }        
+        
     }
 
     public void ChangeSkill(SkillObject skillObject)
     {
         if(skillObject == null) return;
-        currentSkillObject = skillObject;
 
-        OnSkillChanged?.Invoke(currentSkillObject);
-        
+        currentSkillObject = skillObject;
         coolDown = currentSkillObject.coolDown;
         remainCount = currentSkillObject.amount;
         if (skills[currentSkillObject.type] == null) return;
         currentSkill = skills[currentSkillObject.type];
+
+        OnSkillChanged?.Invoke(currentSkillObject);
     }
 
     public void DeleteSkill()

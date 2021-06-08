@@ -112,7 +112,7 @@ public class playercontroler : MonoBehaviour {
 		}
 		transform.Rotate(new Vector3(0f,movex*rotationalspeed,0f));
 		movement = new Vector3 (rb.transform.forward.x*100, rb.transform.forward.y*100-49f, rb.transform.forward.z*100);
-		if (Input.GetAxis(function)>0/*&&(cooldown<=0)*/){
+		if (Input.GetAxis(function)>0){
 			if (cooldown <= 0)
 			{
 				skillController.UseSkill();

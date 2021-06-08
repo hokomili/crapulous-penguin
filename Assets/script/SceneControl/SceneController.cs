@@ -22,8 +22,10 @@ public class SceneController : MonoBehaviour
     public Button toturialBtn;
     public Button staaffBtn;
     public Button exitGameBtn;
+
     public AudioObjects audioObjects;
     public AudioSource audioSource;
+    private bool audioPlay = false;
 
     private ISceneState currentSceneState = null;
     private AsyncOperation asyncLoad;
@@ -50,8 +52,7 @@ public class SceneController : MonoBehaviour
             {SceneType.Menu, new MenuSceneState(this)},
             {SceneType.Game, new GameSceneState(this)},
         };
-        currentSceneState = new MenuSceneState(this); 
-        Debug.Log("Awake is called");
+        currentSceneState = sceneDic[SceneType.Menu]; 
         // SetScene(SceneType.Menu);
     }
 
@@ -100,6 +101,20 @@ public class SceneController : MonoBehaviour
     {
         audioSource.clip = audioClip;
         if(!audioSource.isPlaying) audioSource.Play();
+    }
+
+    public void PlayAudioOnce(AudioClip audioClip)
+    {
+        audioSource.clip = audioClip;
+        if(!audioPlay)
+        {
+            audioPlay = true;
+            audioSource.PlayOneShot(audioClip);
+        }
+        if(audioPlay && !audioSource.isPlaying)
+        {
+            audioPlay = false;
+        }
     }
 
     public void StopAudio()

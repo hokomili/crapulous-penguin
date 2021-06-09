@@ -9,7 +9,7 @@ public enum SceneType
     Menu,
     Game,
     Result,
-    Toturial,
+    Tutorial,
     Staff,
 
 }
@@ -19,7 +19,7 @@ public class SceneController : MonoBehaviour
     private static SceneController _instance;
 
     public Button startGameBtn;
-    public Button toturialBtn;
+    public Button tutorialBtn;
     public Button staaffBtn;
     public Button exitGameBtn;
 
@@ -51,6 +51,7 @@ public class SceneController : MonoBehaviour
         {
             {SceneType.Menu, new MenuSceneState(this)},
             {SceneType.Game, new GameSceneState(this)},
+            {SceneType.Tutorial, new TutorialSceneState(this)},
         };
         currentSceneState = sceneDic[SceneType.Menu]; 
         // SetScene(SceneType.Menu);

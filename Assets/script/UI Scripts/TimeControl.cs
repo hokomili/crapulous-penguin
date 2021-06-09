@@ -25,12 +25,6 @@ public class TimeControl : MonoBehaviour
         if (countDownTime <= 0f)
         {
             timeText.text = "0:00";
-            OnTimeOver();
         }
-    }
-
-    public void OnTimeOver()
-    {
-        //進結算畫面
     }
 }

@@ -13,12 +13,12 @@ public class MenuSceneState : ISceneState
     public override void SceneBegin()
     {
         sceneController.startGameBtn = GameObject.Find("StartGameBtn")?.GetComponent<Button>();
-        sceneController.toturialBtn = GameObject.Find("ToturialBtn")?.GetComponent<Button>();
+        sceneController.tutorialBtn = GameObject.Find("TutorialBtn")?.GetComponent<Button>();
         sceneController.staaffBtn = GameObject.Find("StaffBtn")?.GetComponent<Button>();
         sceneController.exitGameBtn = GameObject.Find("ExitGameBtn")?.GetComponent<Button>();
 
         sceneController.startGameBtn?.onClick.AddListener( ()=>OnStartGameClicked() );
-        sceneController.toturialBtn?.onClick.AddListener( ()=>OnToturialClicked() );
+        sceneController.tutorialBtn?.onClick.AddListener( ()=>OnTutorialClicked() );
         sceneController.staaffBtn?.onClick.AddListener( ()=>OnStaffClicked() );
         sceneController.exitGameBtn?.onClick.AddListener( ()=>OnExitGameClicked() );
     }
@@ -39,9 +39,10 @@ public class MenuSceneState : ISceneState
         sceneController.SetScene(SceneType.Game);
     }
 
-    public void OnToturialClicked()
+    public void OnTutorialClicked()
     {
-        //go to toturial scene
+        Debug.Log("go to tutorial");
+        sceneController.SetScene(SceneType.Tutorial);
     }
 
     public void OnStaffClicked()

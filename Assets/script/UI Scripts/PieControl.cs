@@ -37,7 +37,11 @@ public class PieControl : MonoBehaviour
 
     private void SetText()
     {
-        p1_Text.text = "佔有格數：" + penguin1.territory;
-        p2_Text.text = "佔有格數：" + penguin2.territory;
+        int p1=penguin1.territory;
+        int p2=penguin2.territory;
+        if(p1+p2>0){
+            p1_Text.text = (float)p1/(p1+p2)*100 + "%";
+            p2_Text.text = (float)p2/(p1+p2)*100 + "%";
+        }
     }
 }

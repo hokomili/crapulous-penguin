@@ -47,7 +47,7 @@ public class MenuSceneState : ISceneState
 
     public void OnStaffClicked()
     {
-        //go to staff scene
+        sceneController.SetScene(SceneType.Staff);
     }
 
     public void OnExitGameClicked()

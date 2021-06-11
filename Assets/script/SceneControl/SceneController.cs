@@ -53,6 +53,7 @@ public class SceneController : MonoBehaviour
             {SceneType.Game, new GameSceneState(this)},
             {SceneType.Tutorial, new TutorialSceneState(this)},
             {SceneType.Result, new ResultSceneState(this)},
+            {SceneType.Staff, new StaffSceneState(this)},
         };
         currentSceneState = sceneDic[SceneType.Menu]; 
         // SetScene(SceneType.Menu);

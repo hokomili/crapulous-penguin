@@ -52,6 +52,8 @@ public class SceneController : MonoBehaviour
             {SceneType.Menu, new MenuSceneState(this)},
             {SceneType.Game, new GameSceneState(this)},
             {SceneType.Tutorial, new TutorialSceneState(this)},
+            {SceneType.Result, new ResultSceneState(this)},
+            {SceneType.Staff, new StaffSceneState(this)},
         };
         currentSceneState = sceneDic[SceneType.Menu]; 
         // SetScene(SceneType.Menu);
@@ -95,9 +97,9 @@ public class SceneController : MonoBehaviour
     {
         if(SceneName == null || SceneName.Length == 0) return;
         asyncLoad = SceneManager.LoadSceneAsync(SceneName);
-        // SceneManager.LoadScene(SceneName);
     }
 
+#region AudioControl
     public void PlayAudio(AudioClip audioClip)
     {
         audioSource.clip = audioClip;
@@ -122,4 +124,6 @@ public class SceneController : MonoBehaviour
     {
         audioSource.Stop();
     }
+#endregion
+
 }

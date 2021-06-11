@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameSceneState : ISceneState
 {
     private Animator countDownAni;
-    private TimeControl timeControl;
+    // private TimeControl timeControl;
     public GameSceneState(SceneController sceneController) : base(sceneController)
     {
         this.SceneName = "Game";
@@ -15,7 +15,7 @@ public class GameSceneState : ISceneState
     public override void SceneBegin()
     {
         countDownAni = GameObject.Find("CountDownImage")?.GetComponent<Animator>();
-        timeControl = GameObject.Find("TimeText")?.GetComponent<TimeControl>();
+        // timeControl = GameObject.Find("TimeText")?.GetComponent<TimeControl>();
 
         if(countDownAni != null)
         {
@@ -23,6 +23,8 @@ public class GameSceneState : ISceneState
             countDownAni.Play("AStartCountdown");
             sceneController.PlayAudioOnce(sceneController.audioObjects.audioList[1]);
         } 
+
+        TimeControl.OnGameTimeOver += GameOver;
     }
 
     public override void SceneUpdate()
@@ -38,9 +40,14 @@ public class GameSceneState : ISceneState
 
         if(!sceneController.audioSource.isPlaying) sceneController.PlayAudio(sceneController.audioObjects.audioList[6]);
         
-        if(timeControl.countDownTime <= 0f)
-        {
-            sceneController.SetScene(SceneType.Result);
-        }
+        // if(timeControl.countDownTime <= 0f)
+        // {
+        //     sceneController.SetScene(SceneType.Result);
+        // }
+    }
+
+    public void GameOver()
+    {
+        sceneController.SetScene(SceneType.Result);
     }
 }

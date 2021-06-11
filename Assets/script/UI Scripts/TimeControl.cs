@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,10 @@ public class TimeControl : MonoBehaviour
     public float countDownTime;
 
     [SerializeField]private Text timeText;
+
+    public static event Action BeforeGameTimeOver;
+    public static event Action OnGameTimeOver;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,6 +30,8 @@ public class TimeControl : MonoBehaviour
         if (countDownTime <= 0f)
         {
             timeText.text = "0:00";
+            BeforeGameTimeOver?.Invoke();
+            OnGameTimeOver?.Invoke();
         }
     }
 }

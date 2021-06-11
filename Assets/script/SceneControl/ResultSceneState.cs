@@ -13,7 +13,7 @@ public class ResultSceneState : ISceneState
 
     public override void SceneBegin()
     {
-        ReturnBtn = GameObject.Find("ReturnBtn").GetComponent<Button>();
+        ReturnBtn = GameObject.Find("ReturnBtn")?.GetComponent<Button>();
         if(ReturnBtn) ReturnBtn.onClick.AddListener(OnReturnBtnClick);
     }
 

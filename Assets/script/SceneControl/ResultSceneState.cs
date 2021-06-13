@@ -17,6 +17,11 @@ public class ResultSceneState : ISceneState
         if(ReturnBtn) ReturnBtn.onClick.AddListener(OnReturnBtnClick);
     }
 
+    public override void SceneUpdate()
+    {
+        sceneController.PlayAudio(sceneController.audioObjects.audioList[7]);
+    }
+
     public void OnReturnBtnClick()
     {
         sceneController.SetScene(SceneType.Menu);

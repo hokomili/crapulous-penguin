@@ -15,7 +15,6 @@ public class TutorialSceneState : ISceneState
     {
         ReturnBtn = GameObject.Find("ReturnBtn").GetComponent<Button>();
         if(ReturnBtn) ReturnBtn.onClick.AddListener(OnReturnBtnClick);
-        Debug.Log(ReturnBtn?.name);
     }
 
     public override void SceneUpdate()
